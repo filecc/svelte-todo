@@ -42,11 +42,13 @@
     list[toEdit].text = newText
     list = list
     localStorage.setItem('list', JSON.stringify(list))
-    
-    
   }
 
-
+  function handleClearAll(){
+    list = []
+    list = list
+    localStorage.removeItem('list')
+  }
 
 </script>
 
@@ -60,6 +62,11 @@
     </div>
   </div>
 
+  <div class="text-center mb-6">
+    {#if list.length > 0}
+    <button class="px-2 py-1 bg-red-800 text-white rounded" on:click={handleClearAll}>Clear all the data</button>
+    {/if}
+  </div>
 <div class="text-center grid place-items-center">
   <List on:edit={handleEdit} on:delete={handleDelete} {list} />
 </div>

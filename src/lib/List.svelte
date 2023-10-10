@@ -12,10 +12,10 @@
         })  
     }
 
-    function requestEdit(id)
+    function requestEdit()
     {
         dispatch('edit', {
-            id: id,
+            id: editingId,
             text: newText
         })
         newText = ''
@@ -24,15 +24,15 @@
     }
 
     function edit(id){
-        newText = list[list.findIndex(element => element.id === id)].text
         editingId = id
+        newText = list[list.findIndex(element => element.id === id)].text
     }
 
     function keydown(event)
   {
     if (event.key === 'Enter')
     {
-        requestEdit(editingId)
+        requestEdit()
     }
   }
 </script>
@@ -42,18 +42,20 @@
     {#each list as element}
     <li class="flex justify-between items-center gap-6">
         {#if ( editingId === element.id)}
-        <input class="rounded border-2 border-slate-400" type="text" bind:value={newText} on:keydown={(e) => keydown(e)}>
+        <input autofocus class="rounded border-2 border-slate-400" type="text" bind:value={newText} on:keydown={(e) => keydown(e)}>
         {:else}
         <span>{element.text}</span>
         {/if}
        
         {#if editingId === element.id}
-        <button on:click={() => requestEdit(element.id)} class="text-yellow-600 underline">Confirm</button>
+        <button on:click={requestEdit} class="text-yellow-600 underline">Confirm</button>
+        <button on:click={() => editingId = null} class="text-red-600 underline">Cancel</button>
         {:else}
         <button on:click={() => edit(element.id)} class="text-yellow-600 underline">Edit</button>
+        <button on:click={() => requestToDelete(element.id)} class="text-red-600 underline">Delete</button>
         {/if}
       
-        <button on:click={() => requestToDelete(element.id)} class="text-red-600 underline">Delete</button>
+       
         
     </li>
     {/each}
