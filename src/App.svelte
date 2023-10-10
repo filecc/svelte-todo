@@ -1,7 +1,7 @@
 <script>
   import List from "./lib/List.svelte";
 
-  $: list = [...JSON.parse(localStorage.getItem('list'))] || []
+  $: list = [...JSON.parse(localStorage.getItem('list')) || []]
   let text;
 
 
@@ -23,6 +23,17 @@
     }
   }
 
+  function handleDelete(event)
+  {
+        const id = event.detail.id
+   
+        const toDelete = (element) => element.id === id;
+        list.splice(list.findIndex(toDelete), 1)
+        list = list
+        localStorage.setItem('list', JSON.stringify(list))
+  }
+
+
 
 </script>
 
@@ -36,8 +47,8 @@
     </div>
   </div>
 
-<div class="text-center">
-  <List {list} />
+<div class="text-center grid place-items-center">
+  <List on:id={handleDelete} {list} />
 </div>
   
 </main>
