@@ -59,6 +59,6 @@
     {/each}
 </ul>
 {:else}
-<p>La tua lista &egrave; vuota.</p>
+<p>You have nothing left to do.</p>
 
 {/if}
