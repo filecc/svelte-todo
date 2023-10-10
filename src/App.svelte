@@ -33,6 +33,19 @@
         localStorage.setItem('list', JSON.stringify(list))
   }
 
+  function handleEdit(event)
+  {
+    const id = event.detail.id
+    const newText = event.detail.text
+    const toEdit = list.findIndex(element => element.id === id)
+    
+    list[toEdit].text = newText
+    list = list
+    localStorage.setItem('list', JSON.stringify(list))
+    
+    
+  }
+
 
 
 </script>
@@ -48,7 +61,7 @@
   </div>
 
 <div class="text-center grid place-items-center">
-  <List on:id={handleDelete} {list} />
+  <List on:edit={handleEdit} on:delete={handleDelete} {list} />
 </div>
   
 </main>
