@@ -52,7 +52,7 @@
 
 </script>
 
-<main>
+<main class="bg-sky-200 min-h-[100dvh]">
   <h1 class="text-center text-2xl p-6">A simple Todo with Svelte</h1>
   
   <div class="grid place-items-center p-6">
