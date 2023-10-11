@@ -1,5 +1,6 @@
 <script>
     export let list = [];
+    import { IconArrowBack, IconCheck, IconPencil, IconTrash } from '@tabler/icons-svelte'
     let newText;
     $: editingId = null;
     import { createEventDispatcher } from 'svelte';
@@ -38,9 +39,9 @@
 </script>
 
 {#if list.length > 0}
-<ul class="max-w-lg">
+<ul class="w-full p-3">
     {#each list as element}
-    <li class="flex justify-between items-center gap-6">
+    <li class="flex justify-between items-center gap-6 px-2 py-3 rounded bg-white mb-2 shadow-sm">
         {#if ( editingId === element.id)}
         <input autofocus class="rounded border-2 border-slate-400" type="text" bind:value={newText} on:keydown={(e) => keydown(e)}>
         {:else}
@@ -48,15 +49,18 @@
         {/if}
        
         {#if editingId === element.id}
-        <button on:click={requestEdit} class="text-yellow-600 underline">Confirm</button>
-        <button on:click={() => editingId = null} class="text-red-600 underline">Cancel</button>
-        {:else}
-        <button on:click={() => edit(element.id)} class="text-yellow-600 underline">Edit</button>
-        <button on:click={() => requestToDelete(element.id)} class="text-red-600 underline">Delete</button>
-        {/if}
-      
-       
+        <div>
+            <button on:click={requestEdit} class="text-green-600 underline"><IconCheck size={24} stroke={2} /></button>
+            <button on:click={() => editingId = null} class="text-yellow-600 underline"><IconArrowBack size={24} stroke={2} /></button>
+        </div>
         
+        {:else}
+        <div>
+            <button on:click={() => edit(element.id)} class="text-yellow-600 underline"><IconPencil size={24} stroke={2} /></button>
+            <button on:click={() => requestToDelete(element.id)} class="text-red-600 underline"><IconTrash size={24} stroke={2} /></button>
+        </div>
+        
+        {/if} 
     </li>
     {/each}
 </ul>

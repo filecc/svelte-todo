@@ -1,5 +1,6 @@
 <script>
-  import List from "./lib/List.svelte";
+  import { IconPlus } from "@tabler/icons-svelte";
+import List from "./lib/List.svelte";
 
   $: list = [...JSON.parse(localStorage.getItem('list')) || []]
   let text;
@@ -52,13 +53,13 @@
 
 </script>
 
-<main class="bg-sky-200 min-h-[100dvh]">
+<main class="bg-slate-100 min-h-[100dvh] flex flex-col justify-center items-center">
   <h1 class="text-center text-2xl p-6">A simple Todo with Svelte</h1>
   
   <div class="grid place-items-center p-6">
     <div class="flex gap-2 items-stretch">
       <input on:keydown={(e) => keydown(e)} class="rounded p-3 border-2 border-slate-400" type="text" bind:value={text}>
-      <button on:click={handleAdd} class="px-2 bg-green-600 text-white rounded border-2 border-green-500 hover:bg-green-400 hover:border-green-300 transition-colors duration-500 cursor-pointer">Add</button>
+      <button on:click={handleAdd} class="w-12 grid place-items-center bg-green-600 text-white rounded border-2 border-green-500 hover:bg-green-400 hover:border-green-300 transition-colors duration-500 cursor-pointer"><IconPlus size={24} stroke={2} /></button>
     </div>
   </div>
 
